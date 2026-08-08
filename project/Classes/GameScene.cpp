@@ -58,22 +58,27 @@ bool GameScene::init()
     return true;
 }
 
+void GameScene::onEnter() {
+    Scene::onEnter();
+    
+}
+
+void GameScene::onExit() {
+    Scene::onExit();
+    
+}
+
 void GameScene::setupBackground()
 {
-    auto background = LayerColor::create(
-        Color4B(
-            static_cast<GLubyte>(DropGuard::BACKGROUND_R * 255),
-            static_cast<GLubyte>(DropGuard::BACKGROUND_G * 255),
-            static_cast<GLubyte>(DropGuard::BACKGROUND_B * 255),
-            255));
+    auto background = LayerColor::create(DropGuard::BACKGROUND_COLOR);
 
-    addChild(background);
+    addChild(background, kChildTagBackground);
 }
 
 void GameScene::setupBar()
 {
     _barNode = DrawNode::create();
-    addChild(_barNode);
+    addChild(_barNode, kChildTagBar);
 
     redrawBar();
 }
@@ -93,7 +98,7 @@ void GameScene::setupHud()
         DropGuard::HUD_PADDING,
         size.height - DropGuard::HUD_PADDING);
 
-    addChild(_livesLabel);
+    addChild(_livesLabel, kChildTagHUD);
 
     _scoreLabel = Label::createWithTTF(
         "Score: 0",
@@ -105,7 +110,7 @@ void GameScene::setupHud()
         size.width - DropGuard::HUD_PADDING,
         size.height - DropGuard::HUD_PADDING);
 
-    addChild(_scoreLabel);
+    addChild(_scoreLabel, kChildTagHUD);
 }
 
 void GameScene::setupGameOverLabels()
@@ -122,7 +127,7 @@ void GameScene::setupGameOverLabels()
         size.width * 0.5f,
         size.height * 0.60f);
 
-    addChild(_gameOverLabel);
+    addChild(_gameOverLabel, kChildTagLblGameOver);
 
     _finalScoreLabel = Label::createWithTTF(
         "",
@@ -133,7 +138,7 @@ void GameScene::setupGameOverLabels()
         size.width * 0.5f,
         size.height * 0.50f);
 
-    addChild(_finalScoreLabel);
+    addChild(_finalScoreLabel, kChildTagLblFinalScore);
 
     _bestScoreLabel = Label::createWithTTF(
         "",
@@ -144,7 +149,7 @@ void GameScene::setupGameOverLabels()
         size.width * 0.5f,
         size.height * 0.42f);
 
-    addChild(_bestScoreLabel);
+    addChild(_bestScoreLabel, kChildTagLblBestScore);
 
     _gameOverLabel->setVisible(false);
     _finalScoreLabel->setVisible(false);
@@ -242,7 +247,7 @@ void GameScene::spawnFallingObject()
                 DropGuard::DESIGN_HEIGHT +
                 DropGuard::OBJECT_RADIUS));
 
-    addChild(object);
+    addChild(object, kChildTagFallingObject);
 
     _objects.pushBack(object);
 }
@@ -256,7 +261,7 @@ void GameScene::spawnRisingObject()
                 randomX(),
                 -DropGuard::OBJECT_RADIUS));
 
-    addChild(object);
+    addChild(object, kChildTagRaisingObject);
 
     _objects.pushBack(object);
 }

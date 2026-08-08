@@ -19,6 +19,16 @@ enum class ObjectType
 class GameObject : public cocos2d::Node
 {
 public:
+    GameObject();
+    ~GameObject();
+    
+public:
+    enum ChildTag {
+        None = 0,
+        kChildTagDrawNode
+    };
+    
+public:
 
     static GameObject* create(
         ObjectType type,
@@ -36,11 +46,8 @@ public:
 
     bool isProcessed() const;
     void setProcessed(bool processed);
-
+    
 private:
-
-    GameObject();
-    virtual ~GameObject() override = default;
 
     cocos2d::DrawNode* _visual;
 

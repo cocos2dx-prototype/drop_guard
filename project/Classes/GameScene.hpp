@@ -11,47 +11,34 @@
 #include "cocos2d.h"
 #include "GameObject.hpp"
 
-class GameScene : public cocos2d::Scene
-{
+class GameScene : public cocos2d::Scene {
 public:
-
+    GameScene();
+    ~GameScene();
+    
+public:
+    enum ChildTag {
+        None = 0,
+        kChildTagBackground,
+        kChildTagBar,
+        kChildTagFallingObject,
+        kChildTagRaisingObject,
+        kChildTagHUD,
+        kChildTagLblGameOver,
+        kChildTagLblFinalScore,
+        kChildTagLblBestScore,
+    };
+    
+public:
     static cocos2d::Scene* createScene();
 
-    virtual bool init() override;
-
+private:
     CREATE_FUNC(GameScene);
+    virtual bool init() override;
+    virtual void onEnter() override;
+    virtual void onExit() override;
 
 private:
-
-    void updateGame(float delta);
-
-    void setupBackground();
-    void setupBar();
-    void setupHud();
-    void setupGameOverLabels();
-    void setupInput();
-
-    void redrawBar();
-
-    void spawnFallingObject();
-    void spawnRisingObject();
-
-    void updateDifficulty(float delta);
-    void updateSpawning(float delta);
-    void updateObjects(float delta);
-
-    void processCrossing(GameObject* object);
-
-    void addScore(int amount);
-    void loseLife();
-
-    void triggerGameOver();
-    void restartGame();
-
-    float randomX() const;
-
-private:
-
     cocos2d::DrawNode* _barNode;
 
     cocos2d::Label* _livesLabel;
@@ -78,6 +65,37 @@ private:
 
     float _fallSpawnTimer;
     float _riseSpawnTimer;
+    
+private:
+    void _initValues();
+    void _initObjects();
+    
+    void updateGame(float delta);
+
+    void setupBackground();
+    void setupBar();
+    void setupHud();
+    void setupGameOverLabels();
+    void setupInput();
+
+    void redrawBar();
+
+    void spawnFallingObject();
+    void spawnRisingObject();
+
+    void updateDifficulty(float delta);
+    void updateSpawning(float delta);
+    void updateObjects(float delta);
+
+    void processCrossing(GameObject* object);
+
+    void addScore(int amount);
+    void loseLife();
+
+    void triggerGameOver();
+    void restartGame();
+
+    float randomX() const;
 };
 
 #endif /* GameScene_hpp */

@@ -17,6 +17,10 @@ GameObject::GameObject()
 {
 }
 
+GameObject::~GameObject() {
+    
+}
+
 GameObject* GameObject::create(
     ObjectType type,
     const Vec2& position)
@@ -49,7 +53,7 @@ bool GameObject::init(
     setPosition(position);
 
     _visual = DrawNode::create();
-    addChild(_visual);
+    addChild(_visual, kChildTagDrawNode);
 
     const Color4F color =
         (_type == ObjectType::Falling)

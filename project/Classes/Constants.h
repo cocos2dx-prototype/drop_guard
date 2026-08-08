@@ -8,15 +8,15 @@
 #ifndef Constants_h
 #define Constants_h
 
+#include "cocos2d.h"
+
 namespace DropGuard
 {
     constexpr float DESIGN_WIDTH  = 960.0f;
     constexpr float DESIGN_HEIGHT = 640.0f;
 
     // Background
-    constexpr float BACKGROUND_R = 0.03f;
-    constexpr float BACKGROUND_G = 0.06f;
-    constexpr float BACKGROUND_B = 0.15f;
+    const cocos2d::Color4B BACKGROUND_COLOR(7, 15, 38, 255);
 
     // Bar
     constexpr float BAR_Y = 320.0f;
@@ -52,22 +52,8 @@ namespace DropGuard
     constexpr int SCORE_FONT_SIZE = 32;
 
     // Colors
-    const cocos2d::Color4F BAR_COLOR =
-        cocos2d::Color4F::WHITE;
-
-    const cocos2d::Color4F FALLING_COLOR =
-        cocos2d::Color4F(
-            1.0f,
-            0.50f,
-            0.45f,
-            1.0f);
-
-    const cocos2d::Color4F RISING_COLOR =
-        cocos2d::Color4F(
-            0.40f,
-            0.75f,
-            1.0f,
-            1.0f);
+    const cocos2d::Color4F FALLING_COLOR = cocos2d::Color4F(1.0f, 0.50f, 0.45f, 1.0f);
+    const cocos2d::Color4F RISING_COLOR = cocos2d::Color4F(0.40f, 0.75f, 1.0f, 1.0f);
 }
 
 #endif /* Constants_h */
